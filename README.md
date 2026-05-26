@@ -1,80 +1,34 @@
-# Portfolio Website
+# 💻 Portfolio Website
 
-Personal portfolio website built with React. This project showcases projects, experience, education, skills, and contact information.
+A responsive personal portfolio website built with **React** and modern UI frameworks. This project cleanly showcases professional experience, education, key technical skills, featured projects, and integrates a direct contact mechanism.
 
-## Features
-- Responsive layout
-- Projects, Experience, Education sections
-- Contact form (EmailJS integration)
-- Theme support
-- Built with React and styled-components / MUI
+🌐 **Live Demo:** [mrinalguptawebsite.vercel.app](https://mrinalguptawebsite.vercel.app/)
 
-## Tech Stack
-- React
-- styled-components
-- Material UI
-- EmailJS (for contact form)
+---
 
-## Project Structure
+## 🚀 Features
 
-- `src/` — application source
-  - `components/` — React components grouped by feature
-  - `data/` — static data and constants
-  - `images/` — images used in the site
-  - `themes/` — theme configuration
-  - `utils/` — helper utilities
+* 📱 **Responsive Layout:** Optimized for seamless viewing across mobile, tablet, and desktop viewports.
+* 🗂️ **Structured Sections:** Dedicated components for Projects, Experience, Education, and Technical Skills.
+* ✉️ **Interactive Contact Form:** Fully functional email delivery integration using EmailJS.
+* 🎨 **Dynamic Theme Support:** Built-in styling configurations for a polished look and feel.
 
-## Setup and Running Locally
+---
 
-Prerequisites: Node.js (>=14) and npm or yarn.
+## 🛠️ Tech Stack
 
-1. Install dependencies
+* **Core:** [React](https://reactjs.org/)
+* **Styling & UI Components:** `styled-components` & [Material UI (MUI)](https://mui.com/)
+* **Form Integration:** [EmailJS](https://www.emailjs.com/)
 
-```bash
-npm install
-# or
-yarn
-```
+---
 
-2. Start the development server
+## 📂 Project Structure
 
-```bash
-npm start
-# or
-yarn start
-```
-
-The app will open at `http://localhost:3000` by default.
-
-## Build
-
-Create a production build:
-
-```bash
-npm run build
-# or
-yarn build
-```
-
-The optimized build will be in the `build/` folder.
-
-## Deployment
-
-This project can be deployed to static hosts (GitHub Pages, Netlify, Vercel).
-
-If using `gh-pages`, the `devDependencies` includes `gh-pages`. Configure `homepage` in `package.json` and add deploy scripts before publishing.
-
-## Tips / Notes
-- Environment variables (if any credentials are used for EmailJS) should be stored in a `.env` file and never committed.
-- To customize content, edit the components and the `data/constants.js` file.
-
-## Contributing
-
-1. Fork the repo
-2. Create a branch: `git checkout -b feature/my-feature`
-3. Commit your changes: `git commit -m "feat: add ..."`
-4. Push to the branch and open a PR
-
-## License
-
-This repository does not include a license file. Add one if you intend to share or publish.
+```text
+src/
+├── components/   # React components grouped by feature (Navbar, Projects, etc.)
+├── data/         # Static configuration data and text constants (constants.js)
+├── images/       # Image assets used across the application
+├── themes/       # Theme configurations and global styling properties
+└── utils/        # Shared helper utilities and functions
