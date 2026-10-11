@@ -6,6 +6,8 @@ import akbLogo from "../images/akb-tech.webp";
 import shubhamPhoto from "../images/people/shubham-aggarwal.webp";
 import prernaPhoto from "../images/people/prerna-singhal.webp";
 import manishPhoto from "../images/people/manish-kumar-singh.webp";
+import nftImg from "../images/nft-marketplace.webp";
+import monumaticImg from "../images/monumatic.webp";
 
 const devicon = (path) => `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${path}`;
 
@@ -298,8 +300,7 @@ export const projects = [
     date: "Mar 2024 - Apr 2024",
     description:
       "Decentralized NFT marketplace enabling secure transactions through blockchain technology and smart contracts, with ownership tracking and transaction history built on Web3.",
-    image:
-      "https://raw.githubusercontent.com/mrinalgupta24/NFT-Marketplace/main/nftmarkplace.png",
+    image: nftImg,
     tags: ["React Js", "Next Js", "MongoDB", "Node Js", "Redux", "Solidity", "Web3.js"],
     category: "web app",
     note: "Source code is proprietary. The project was sold.",
@@ -310,8 +311,7 @@ export const projects = [
     date: "Mar 2023 - May 2023",
     description:
       "Heritage site ticket booking platform with QR-based e-ticket generation and a monument information management system.",
-    image:
-      "https://github.com/mrinalgupta24/Monumatic/blob/master/monumatic.png?raw=true",
+    image: monumaticImg,
     tags: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
     category: "web app",
     note: "Source code is proprietary. The project was sold.",
