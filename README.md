@@ -1,25 +1,49 @@
 # 💻 Portfolio Website
 
-A responsive personal portfolio website built with **React** and modern UI frameworks. This project cleanly showcases professional experience, education, key technical skills, featured projects, and integrates a direct contact mechanism.
+Personal portfolio of Mrinal Gupta, Customer Success Engineer, built with **React**, **Vite** and **Framer Motion**. It showcases experience, skills, AI projects, certifications and testimonials, with a working contact form.
 
-🌐 **Live Demo:** [mrinalguptawebsite.vercel.app](https://mrinalguptawebsite.vercel.app/)
+🌐 **Live:** [mrinalguptawebsite.vercel.app](https://mrinalguptawebsite.vercel.app/)
 
 ---
 
 ## 🚀 Features
 
-* 📱 **Responsive Layout:** Optimized for seamless viewing across mobile, tablet, and desktop viewports.
-* 🗂️ **Structured Sections:** Dedicated components for Projects, Experience, Education, and Technical Skills.
-* ✉️ **Interactive Contact Form:** Fully functional email delivery integration using EmailJS.
-* 🎨 **Dynamic Theme Support:** Built-in styling configurations for a polished look and feel.
+* 📱 **Responsive:** tested on Chrome, Firefox and Safari across desktop, iPhone and iPad.
+* 🌗 **Dark and light themes,** remembered per visitor.
+* ✨ **Motion:** scroll reveals, animated project covers and count-up stats, with reduced motion respected.
+* ✉️ **Contact form** delivered to Gmail through [Web3Forms](https://web3forms.com/), with a spam honeypot.
+* ⚡ **Performance:** WebP images, code-split bundles, Lighthouse 99/100/100/100 on desktop.
+* 🔒 **Security headers** (CSP, HSTS, frame protection) configured in `vercel.json`.
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Core:** [React](https://reactjs.org/)
-* **Styling & UI Components:** `styled-components` & [Material UI (MUI)](https://mui.com/)
-* **Form Integration:** [EmailJS](https://www.emailjs.com/)
+* **Core:** React 18 + Vite
+* **Styling:** styled-components
+* **Animation:** Framer Motion
+* **Forms:** Formik + Yup, Web3Forms, react-toastify
+* **Icons:** react-icons, LobeHub AI icons
+
+---
+
+## 🏁 Getting Started
+
+```bash
+npm install
+cp .env.example .env.local   # then add your Web3Forms access key
+npm start                    # dev server on http://localhost:3000
+npm run build                # production build into build/
+npm run preview              # serve the production build locally
+```
+
+### Environment variables
+
+| Variable | Where to get it |
+|---|---|
+| `VITE_WEB3FORMS_ACCESS_KEY` | Web3Forms dashboard → your form's access key |
+
+Set it in `.env.local` for local development and in **Vercel → Settings → Environment Variables** for production.
 
 ---
 
@@ -27,8 +51,12 @@ A responsive personal portfolio website built with **React** and modern UI frame
 
 ```text
 src/
-├── components/   # React components grouped by feature (Navbar, Projects, etc.)
-├── data/         # Static configuration data and text constants (constants.js)
-├── images/       # Image assets used across the application
-├── themes/       # Theme configurations and global styling properties
-└── utils/        # Shared helper utilities and functions
+├── components/   # One folder per section (HeroSection, Experience, Skills, Projects, ...)
+│   ├── Cards/    # Experience, education and project cards, plus project cover art
+│   └── ui/       # Shared building blocks: section header, reveal, buttons, background
+├── data/         # All site content: constants.js (bio, experience, projects...) and skillIcons.js
+├── images/       # WebP images, people photos and AI provider logos
+└── utils/        # Theme tokens (dark and light)
+```
+
+Most content updates only need changes to `src/data/constants.js`.

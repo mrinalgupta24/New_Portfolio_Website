@@ -1,150 +1,105 @@
 import React from 'react'
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
+import { HiAcademicCap, HiCalendar } from 'react-icons/hi2'
+import { SpotlightCard, Logo } from '../ui'
 
-const Document = styled.img`
-    display: none;
-    height: 70px;
-    width: fit-content;
-    background-color: #000;
-    border-radius: 10px;
-    &:hover{
-        cursor: pointer;
-        opacity: 0.8;
-    }
-`
-
-const Description = styled.div`
-    width: 100%;
-    font-size: 15px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.text_primary + 99};
-    margin-bottom: 10px;
-    @media only screen and (max-width: 768px){
-        font-size: 12px;
-    }
-`
-
-const Span = styled.span`
-overflow: hidden;
-display: -webkit-box;
-max-width: 100%;
--webkit-line-clamp: 4;
--webkit-box-orient: vertical;
-text-overflow: ellipsis;
-`
-
-const Card = styled.div`
-    width: 650px;
-    border-radius: 10px;
-    box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
-    padding: 12px 16px;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transition: all 0.3s ease-in-out;
-    &:hover{
-        box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
-        transform: translateY(-5px);
-    }
-    @media only screen and (max-width: 768px){
-        padding: 10px;
-        gap: 8px;
-        width: 300px;
-    }
-
-    &:hover ${Document}{
-        display: flex;
-    }
-
-    &:hover ${Span}{
-        overflow: visible;
-        -webkit-line-clamp: unset;
-
-    }
-    border: 0.1px solid #f4a261;
+const Body = styled.div`
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 28px;
+  @media (max-width: 640px) {
+    padding: 22px;
+  }
 `
 
 const Top = styled.div`
-    width: 100%;
-    display: flex;
-    gap: 12px
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
 `
 
-const Image = styled.img`
-    height: 50px;
-    background-color: #000;
-    border-radius: 10px;
-    margin-top: 4px;
-    @media only screen and (max-width: 768px){
-        height: 40px;
-    }
+const Degree = styled.h3`
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: ${({ theme }) => theme.text_primary};
 `
 
-const Body = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column; 
+const College = styled.p`
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: ${({ theme }) => theme.text_secondary};
 `
 
-
-const Name = styled.div`
-    font-size: 18px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.text_primary + 99};
-    @media only screen and (max-width: 768px){
-        font-size: 14px;
-    }
+const University = styled.p`
+  margin-top: 2px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.primary};
 `
 
-const Degree = styled.div`
-    font-size: 14px;
-    font-weight: 500;
-    color: ${({ theme }) => theme.text_secondary + 99};
-    @media only screen and (max-width: 768px){
-        font-size: 12px;
-    }
+const Row = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 `
 
-const Date = styled.div`
-    font-size: 12px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.text_secondary + 80};
-    @media only screen and (max-width: 768px){
-        font-size: 10px;
-    }
+const Pill = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.text_secondary};
+  background: ${({ theme }) => theme.card};
+  border: 1px solid ${({ theme }) => theme.border};
 `
 
-const Grade = styled.div`
-    font-size: 14px;
-    font-weight: 500;
-    color: ${({ theme }) => theme.text_secondary + 99};
-    @media only screen and (max-width: 768px){
-        font-size: 12px;
-    }
+const Grade = styled(Pill)`
+  color: #fff;
+  border: none;
+  background: ${({ theme }) => theme.gradient};
 `
 
+const Desc = styled.p`
+  font-size: 15px;
+  line-height: 1.75;
+  color: ${({ theme }) => theme.text_secondary};
+`
 
-
-const EducationCard = ({ education }) => {
-    return (
-        <Card>
-            <Top>
-                <Image src={education.img} />
-                <Body>
-                    <Name>{education.school}</Name>
-                    <Degree>{education.degree}</Degree>
-                    <Date>{education.date}</Date>
-                </Body>
-            </Top>
-            <Grade><b>Grade: </b>{education.grade}</Grade>
-            <Description>
-                <Span>{education.desc}</Span>
-            </Description>
-        </Card>
-    )
-}
+const EducationCard = ({ education, index = 0 }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-60px' }}
+    transition={{ duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+    style={{ height: '100%' }}
+  >
+    <SpotlightCard whileHover={{ y: -6 }} style={{ height: '100%' }}>
+      <Body>
+        <Top>
+          <Logo src={education.img} name={education.college} size={60} />
+          <div>
+            <Degree>{education.degree}</Degree>
+            <College>{education.college}</College>
+            {education.university && <University>{education.university}</University>}
+          </div>
+        </Top>
+        <Row>
+          <Pill><HiCalendar /> {education.date}</Pill>
+          {education.grade && <Grade><HiAcademicCap /> {education.grade}</Grade>}
+        </Row>
+        {education.desc && <Desc>{education.desc}</Desc>}
+      </Body>
+    </SpotlightCard>
+  </motion.div>
+)
 
 export default EducationCard
