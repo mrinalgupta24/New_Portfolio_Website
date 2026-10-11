@@ -2,6 +2,7 @@ import { lazy, Suspense, useState } from "react";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { AnimatePresence, MotionConfig } from "framer-motion";
 import { ToastContainer } from "react-toastify";
+import { Analytics } from "@vercel/analytics/react";
 import "react-toastify/dist/ReactToastify.css";
 import { darkTheme } from './utils/Themes.js'
 import './App.css';
@@ -15,6 +16,10 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Certifications from "./components/Certifications";
 import Testimonials from "./components/Testimonials";
+import GlobalReach from "./components/GlobalReach";
+import Assistant from "./components/Assistant";
+import CommandPalette from "./components/CommandPalette";
+import Clarity from "./components/Clarity";
 import { Background, ScrollProgress } from "./components/ui";
 
 // The project popup is only needed after a click, so it loads on demand.
@@ -36,6 +41,10 @@ const GlobalStyle = createGlobalStyle`
   }
   .Toastify__toast-container {
     padding: 0 16px;
+  }
+  /* Sit above the "Ask my AI" button */
+  .Toastify__toast-container--bottom-right {
+    bottom: 92px;
   }
   .Toastify__toast {
     position: relative;
@@ -114,6 +123,7 @@ const Home = () => {
       <Navbar />
       <Body>
         <HeroSection />
+        <GlobalReach />
         <Experience />
         <Skills />
         <Projects setOpenModal={setOpenModal} />
@@ -143,6 +153,10 @@ function App() {
         <ScrollProgress />
         <Background />
         <Home />
+        <Assistant />
+        <CommandPalette />
+        <Analytics />
+        <Clarity />
         <ToastContainer position="bottom-right" theme="dark" autoClose={5000} newestOnTop pauseOnFocusLoss={false} />
       </MotionConfig>
     </ThemeProvider>

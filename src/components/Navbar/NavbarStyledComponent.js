@@ -196,3 +196,39 @@ export const MobileLink = styled(motion.a)`
   color: ${({ theme, $active }) => ($active ? theme.primary : theme.text_primary)};
   background: ${({ theme, $active }) => ($active ? theme.primary + '14' : 'transparent')};
 `
+
+export const SearchButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 12px 0 14px;
+  border-radius: 999px;
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.card};
+  color: ${({ theme }) => theme.text_secondary};
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  .kbd {
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid ${({ theme }) => theme.border};
+  }
+  &:hover {
+    color: ${({ theme }) => theme.text_primary};
+    border-color: ${({ theme }) => theme.primary};
+  }
+  @media (max-width: 1060px) {
+    width: 42px;
+    padding: 0;
+    justify-content: center;
+    .kbd {
+      display: none;
+    }
+  }
+`

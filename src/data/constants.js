@@ -358,3 +358,22 @@ export const testimonials = [
     approved: true,
   },
 ];
+
+// Where clients are based, shown on the globe. Edit freely: [latitude, longitude].
+// `home: true` marks where Mrinal works from.
+export const clientLocations = [
+  { city: "Gurugram", country: "India", coords: [28.4595, 77.0266], home: true },
+  { city: "Mumbai", country: "India", coords: [19.076, 72.8777] },
+  { city: "Bengaluru", country: "India", coords: [12.9716, 77.5946] },
+  { city: "New York", country: "United States", coords: [40.7128, -74.006] },
+  { city: "San Francisco", country: "United States", coords: [37.7749, -122.4194] },
+  { city: "Chicago", country: "United States", coords: [41.8781, -87.6298] },
+  { city: "Austin", country: "United States", coords: [30.2672, -97.7431] },
+  { city: "Toronto", country: "Canada", coords: [43.6532, -79.3832] },
+  { city: "London", country: "United Kingdom", coords: [51.5072, -0.1276] },
+  { city: "Berlin", country: "Germany", coords: [52.52, 13.405] },
+  { city: "Amsterdam", country: "Netherlands", coords: [52.3676, 4.9041] },
+  { city: "Dubai", country: "United Arab Emirates", coords: [25.2048, 55.2708] },
+  { city: "Singapore", country: "Singapore", coords: [1.3521, 103.8198] },
+  { city: "Sydney", country: "Australia", coords: [-33.8688, 151.2093] },
+];

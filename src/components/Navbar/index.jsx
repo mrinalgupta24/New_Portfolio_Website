@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { FaBars, FaGithub } from 'react-icons/fa'
 import { HiX } from 'react-icons/hi'
+import { HiMagnifyingGlass } from 'react-icons/hi2'
 import { Bio } from '../../data/constants'
+import { openPalette } from '../CommandPalette'
 import avatar from '../../images/mrinalgupta-avatar.webp'
 import {
   Nav, NavInner, NavLogo, LogoMark, NavItems, NavLink, ActivePill, Actions,
-  GitHubButton, MobileIcon, MobileMenu, MobileLink,
+  GitHubButton, MobileIcon, MobileMenu, MobileLink, SearchButton,
 } from './NavbarStyledComponent'
 
 export const sections = [
@@ -18,6 +20,8 @@ export const sections = [
   { id: 'education', label: 'Education' },
   { id: 'contact', label: 'Contact' },
 ]
+
+const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -73,6 +77,10 @@ const Navbar = () => {
         </NavItems>
 
         <Actions>
+          <SearchButton onClick={openPalette} aria-label="Open command palette">
+            <HiMagnifyingGlass />
+            <span className="kbd">{isMac ? '⌘' : 'Ctrl'} K</span>
+          </SearchButton>
           <GitHubButton href={Bio.github} target="_blank" rel="noopener noreferrer">
             <FaGithub /> GitHub
           </GitHubButton>

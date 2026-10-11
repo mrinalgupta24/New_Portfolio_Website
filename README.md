@@ -14,6 +14,9 @@ Personal portfolio of Mrinal Gupta, Customer Success Engineer, built with **Reac
 * ✉️ **Contact form** delivered to Gmail through [Web3Forms](https://web3forms.com/), with a spam honeypot.
 * ⚡ **Performance:** WebP images, code-split bundles, Lighthouse 99/100/100/100 on desktop.
 * 🔒 **Security headers** (CSP, HSTS, frame protection) configured in `vercel.json`.
+* 🤖 **Ask Mrinal's AI:** a resume-grounded Gemini assistant behind a Vercel function (`api/chat.js`).
+* 🌍 **Interactive 3D globe** of client regions (cobe) and a **⌘K command palette**.
+* 📊 **Vercel Web Analytics** and optional **Microsoft Clarity**.
 
 ---
 
@@ -42,6 +45,10 @@ npm run preview              # serve the production build locally
 | Variable | Where to get it |
 |---|---|
 | `VITE_WEB3FORMS_ACCESS_KEY` | Web3Forms dashboard → your form's access key |
+| `VITE_CLARITY_ID` *(optional)* | clarity.microsoft.com → project Settings → Overview |
+| `GEMINI_API_KEY` *(optional, server-only)* | aistudio.google.com/apikey, powers "Ask Mrinal's AI" |
+| `GEMINI_MODEL` *(optional)* | Defaults to `gemini-2.5-flash` |
+| `VITE_ASSISTANT_ENABLED` *(optional)* | `true` to show the AI chat once `GEMINI_API_KEY` is set |
 
 Set it in `.env.local` for local development and in **Vercel → Settings → Environment Variables** for production.
 
