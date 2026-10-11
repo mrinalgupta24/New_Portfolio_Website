@@ -6,3 +6,4 @@ node_modules
 # Production build output (Vercel builds it on deploy)
 /build
 /dist
+.vercel
