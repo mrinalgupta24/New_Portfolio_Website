@@ -1,45 +1,63 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
-
 }
 
 html {
+  color-scheme: dark;
+  background: #0a0a12;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 body {
-  margin: 0px !important;
-  padding: 0;
-  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* width */
+h1, h2, h3, h4 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+::selection {
+  background: rgba(244, 162, 97, 0.35);
+}
+
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 80px;
+  width: 6px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: #222A35;
+  background: transparent;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #575C66;
+  background: linear-gradient(#f4a261, #e85d75);
   border-radius: 6px;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #626970;
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #f4a261;
+  outline-offset: 3px;
 }
 
-.errors {
-  color: hsla(26, 86%, 66%, 1);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

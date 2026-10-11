@@ -1,203 +1,272 @@
-import styled from "styled-components";
-import _default from "../../themes/default";
+import styled, { keyframes } from 'styled-components'
+import { motion } from 'framer-motion'
 
-export const HeroContainer = styled.div`
-  background: ${({ theme }) => theme.card_light};
+const spin = keyframes`to { transform: rotate(360deg); }`
+
+export const HeroContainer = styled.section`
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   justify-content: center;
-  position: relative;
-  padding: 80px 30px;
-  @media (max-width: 960px) {
-    padding: 66px 16px;
-  }
-  @media (max-width: 640) {
-    padding: 32px 16px;
-  }
-  z-index: 1;
-
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 95%, 0 100%);
-`;
-
-export const HeroBg = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: end;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  max-width: 1360px;
-  overflow: hidden;
-  padding: 0 30px;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-
-  @media (max-width: 960px) {
-    justify-content: center;
-    padding: 0 0px;
-  }
-`;
-
-export const HeroInnerContainer = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
-  max-width: 1100px;
-
+  padding: 130px 24px 90px;
   @media (max-width: 960px) {
-    flex-direction: column;
+    padding: 120px 16px 80px;
   }
-`;
-export const HeroLeftContainer = styled.div`
+`
+
+export const HeroInner = styled.div`
   width: 100%;
-  order: 1;
+  max-width: 1120px;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: 56px;
   @media (max-width: 960px) {
-    order: 2;
-    margin-bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
+`
 
-  @media (max-width: 640px) {
-    order: 2;
-    margin-bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
-export const HeroRightContainer = styled.div`
-  width: 100%;
+export const HeroLeft = styled(motion.div)`
   display: flex;
-  order: 2;
-  justify-content: end;
-  gap: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  @media (max-width: 960px) {
+    order: 2;
+    align-items: center;
+    text-align: center;
+  }
+`
+
+export const HeroRight = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
   @media (max-width: 960px) {
     order: 1;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 80px;
   }
+`
 
-  @media (max-width: 640px) {
-    margin-bottom: 30px;
-  }
-`;
-
-export const Img = styled.img`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  max-width: 400px;
-  max-height: 400px;
-  border-radius: 50%;
-  border: 2px solid ${({ theme }) => theme.primary};
-
-  @media (max-width: 768px) {
-    max-width: 400px;
-    max-height: 400px;
-  }
-
-  @media (max-width: 640px) {
-    max-width: 280px;
-    max-height: 280px;
-  }
-`;
-
-export const Title = styled.div`
+export const Title = styled(motion.h1)`
+  font-size: clamp(42px, 6.4vw, 76px);
   font-weight: 700;
-  font-size: 50px;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
   color: ${({ theme }) => theme.text_primary};
-  line-height: 68px;
+`
+
+export const RoleTitle = styled(motion.h2)`
+  margin-top: 18px;
+  font-size: clamp(22px, 2.8vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: ${({ theme }) => theme.text_primary};
   @media (max-width: 960px) {
     text-align: center;
   }
+`
 
-  @media (max-width: 640px) {
-    font-size: 40px;
-    line-height: 48px;
-    margin-bottom: 8px;
+export const TextLoop = styled(motion.div)`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(17px, 2vw, 21px);
+  font-weight: 500;
+  color: ${({ theme }) => theme.text_secondary};
+  .role {
+    color: ${({ theme }) => theme.primary};
+    min-height: 1.3em;
   }
-`;
+  @media (max-width: 960px) {
+    justify-content: center;
+  }
+`
 
-export const TextLoop = styled.div`
-  font-weight: 600;
-  font-size: 32px;
+export const SubTitle = styled(motion.p)`
+  margin-top: 22px;
+  max-width: 560px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: ${({ theme }) => theme.text_secondary};
+`
+
+export const Ctas = styled(motion.div)`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 36px;
+  @media (max-width: 960px) {
+    justify-content: center;
+  }
+`
+
+export const Socials = styled(motion.div)`
   display: flex;
   gap: 12px;
+  margin-top: 32px;
+`
+
+export const SocialIcon = styled(motion.a)`
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  font-size: 17px;
+  color: ${({ theme }) => theme.text_secondary};
+  background: ${({ theme }) => theme.card};
+  border: 1px solid ${({ theme }) => theme.border};
+  transition: color 0.2s ease, border-color 0.2s ease;
+  &:hover {
+    color: ${({ theme }) => theme.primary};
+    border-color: ${({ theme }) => theme.primary + '66'};
+  }
+`
+
+export const AvatarWrap = styled(motion.div)`
+  position: relative;
+  width: min(380px, 78vw);
+  aspect-ratio: 1;
+  isolation: isolate;
+`
+
+export const Ring = styled.div`
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #f4a261, #e85d75, #8b5cf6, #f4a261);
+  animation: ${spin} 8s linear infinite;
+  filter: blur(0.5px);
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: inherit;
+    filter: blur(40px);
+    opacity: 0.45;
+    z-index: -1;
+  }
+`
+
+export const Avatar = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  z-index: 1;
+  border: 6px solid ${({ theme }) => theme.bg};
+`
+
+export const FloatCard = styled(motion.div)`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
   color: ${({ theme }) => theme.text_primary};
-  line-height: 68px;
+  background: ${({ theme }) => theme.card_light};
+  border: 1px solid ${({ theme }) => theme.borderStrong};
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: ${({ theme }) => theme.shadow};
+  z-index: 3;
+  span {
+    font-size: 18px;
+  }
+  &.tl {
+    top: 4%;
+    left: -14%;
+  }
+  &.br {
+    bottom: 4%;
+    right: -16%;
+  }
   @media (max-width: 960px) {
-    text-align: center;
+    &.tl { left: -6%; }
+    &.br { right: -6%; }
   }
-  @media (max-width: 640px) {
-    font-size: 22px;
-    line-height: 48px;
-    margin-bottom: 16px;
+  @media (max-width: 480px) {
+    font-size: 12px;
+    padding: 8px 12px;
   }
-`;
+`
 
-export const Span = styled.span`
-  color: ${({ theme }) => theme.primary};
-  cursor: pointer;
-`;
+export const ImpactGrid = styled.div`
+  width: min(440px, 100%);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+`
 
-export const SubTitle = styled.div`
-  font-size: 20px;
-  line-height: 32px;
-  margin-bottom: 42px;
-  color: ${({ theme }) => theme.text_primary + 95};
+export const ImpactCard = styled(motion.div)`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: ${({ theme }) => theme.card};
+  border: 1px solid ${({ theme }) => theme.border};
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    bottom: 16px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: ${({ theme }) => theme.gradient};
+  }
+  &:hover {
+    border-color: ${({ theme }) => theme.primary + '55'};
+  }
+  strong {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+    background: ${({ theme }) => theme.gradient};
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  > span {
+    font-size: 13px;
+    line-height: 1.35;
+    color: ${({ theme }) => theme.text_secondary};
+  }
+`
 
+export const ScrollHint = styled(motion.a)`
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  margin-left: -21px;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: ${({ theme }) => theme.text_secondary};
+  border: 1px solid ${({ theme }) => theme.border};
   @media (max-width: 960px) {
-    text-align: center;
+    display: none;
   }
-
-  @media (max-width: 640px) {
-    font-size: 16px;
-    line-height: 32px;
-  }
-`;
-
-export const ResumeButton = styled.a`
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    width: 95%;
-    max-width: 300px;
-    text-align: center;
-    padding: 16px 0;
-    color:${({ theme }) => theme.white};
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 600;
-    transition: all 0.2s ease-in-out !important;
-    background: hsla(355, 82%, 41%, 1);
-    background: linear-gradient(225deg, hsla(355, 82%, 41%, 1) 0%, hsla(26, 86%, 66%, 1) 100%);
-    background: -moz-linear-gradient(225deg, hsla(355, 82%, 41%, 1) 0%, hsla(26, 86%, 66%, 1) 100%);
-    background: -webkit-linear-gradient(225deg, hsla(355, 82%, 41%, 1) 0%, hsla(26, 86%, 66%, 1) 100%);
-    box-shadow:  20px 20px 60px #1F2634,
-    -20px -20px 60px #1F2634;
-    &:hover {
-        transform: scale(1.05);
-    transition: all 0.4s ease-in-out;
-    box-shadow:  20px 20px 60px #1F2634,
-    filter: brightness(1);
-    }    
-    
-    
-    @media (max-width: 640px) {
-        padding: 12px 0;
-        font-size: 18px;
-    } 
-
-`;
+`

@@ -1,239 +1,369 @@
-import { CloseRounded, GitHub, LinkedIn } from '@mui/icons-material';
-import { Modal } from '@mui/material';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { AnimatePresence, motion } from 'framer-motion'
+import { HiXMark, HiArrowUpRight, HiCheckBadge, HiLockClosed } from 'react-icons/hi2'
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa6'
+import { Chip, PrimaryButton, GhostButton } from '../ui'
+import { isLiveUrl, ProjectCover } from '../Cards/ProjectCards'
 
-const Container = styled.div`
-width: 100%;
-height: 100%;
-position: absolute;
-top: 0;
-left: 0;
-background-color: #000000a7;
-display: flex;
-align-items: top;
-justify-content: center;
-overflow-y: scroll;
-transition: all 0.5s ease;
-`;
-
-const Wrapper = styled.div`
-max-width: 800px;
-width: 100%;
-border-radius: 16px;
-margin: 50px 12px;
-height: min-content;
-background-color: ${({ theme }) => theme.card};
-color: ${({ theme }) => theme.text_primary};
-padding: 20px;
-display: flex;
-flex-direction: column;
-position: relative;
-`;
-
-const Title = styled.div`
-  font-size: 28px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.text_primary};
-  margin: 8px 6px 0px 6px;
-  @media only screen and (max-width: 600px) {
-      font-size: 24px;
-      margin: 6px 6px 0px 6px;
-  }
-`;
-
-const Date = styled.div`
-    font-size: 16px;
-    margin: 2px 6px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.text_secondary};
-    @media only screen and (max-width: 768px){
-        font-size: 12px;
-    }
+const Overlay = styled(motion.div)`
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  background: rgba(5, 5, 10, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 `
 
+const Center = styled.div`
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+`
 
+const Panel = styled(motion.div)`
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  border-radius: 28px;
+  overflow: hidden;
+  isolation: isolate;
+  background: ${({ theme }) => (theme.mode === 'dark' ? '#12121c' : '#ffffff')};
+  border: 1px solid ${({ theme }) => theme.borderStrong};
+  box-shadow: 0 40px 100px -30px rgba(0, 0, 0, 0.8);
+`
 
-const Desc = styled.div`
-    font-size: 16px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.text_primary};
-    margin: 8px 6px;
-    @media only screen and (max-width: 600px) {
-        font-size: 14px;
-        margin: 6px 6px;
-    }
-`;
+const Close = styled(motion.button)`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(10, 10, 18, 0.6);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+`
 
-const Image = styled.img`
+const Media = styled.div`
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: ${({ theme }) => theme.bgLight};
+  img {
+    position: absolute;
+    inset: 0;
     width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 12px;
-    margin-top: 30px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
-`;
+    object-position: top left;
+  }
+`
 
-const Label = styled.div`
-    font-size: 20px;
-    font-weight: 600;
+const Fallback = styled.div`
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: #fff;
+  background: ${({ theme }) => theme.gradient};
+`
+
+const Thumbs = styled.div`
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(10, 10, 18, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.4);
+    transition: all 0.25s ease;
+  }
+  button[aria-current='true'] {
+    width: 26px;
+    border-radius: 6px;
+    background: #fff;
+  }
+`
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 30px 34px 36px;
+  @media (max-width: 640px) {
+    padding: 22px 20px 28px;
+  }
+`
+
+const Title = styled.h2`
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: ${({ theme }) => theme.text_primary};
+`
+
+const Date = styled.span`
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.text_secondary};
+`
+
+const Desc = styled.p`
+  font-size: 16px;
+  line-height: 1.8;
+  color: ${({ theme }) => theme.text_secondary};
+`
+
+const Highlights = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  li {
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.6;
     color: ${({ theme }) => theme.text_primary};
-    margin: 8px 6px;
-    @media only screen and (max-width: 600px) {
-        font-size: 16px;
-        margin: 8px 6px;
+    svg {
+      flex-shrink: 0;
+      margin-top: 3px;
+      font-size: 18px;
+      color: ${({ theme }) => theme.primary};
     }
-`;
+  }
+`
+
+const Note = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  color: ${({ theme }) => theme.text_secondary};
+  background: ${({ theme }) => theme.primary + '10'};
+  border: 1px solid ${({ theme }) => theme.primary + '30'};
+  svg {
+    flex-shrink: 0;
+    color: ${({ theme }) => theme.primary};
+  }
+`
 
 const Tags = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    margin: 8px 0px;
-    @media only screen and (max-width: 600px) {
-        margin: 4px 0px;
-    }
-`;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+`
 
-const Tag = styled.div`
-    font-size: 14px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.primary};
-    margin: 4px;
-    padding: 4px 8px;
-    border-radius: 8px;
-    background-color: ${({ theme }) => theme.primary + 20};
-    @media only screen and (max-width: 600px) {
-        font-size: 12px;
-    }
-`;
+const Label = styled.h4`
+  font-size: 15px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.text_primary};
+`
 
 const Members = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin: 12px 6px;
-    @media only screen and (max-width: 600px) {
-        margin: 4px 6px;
-    }
-`;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`
 
 const Member = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 12px;
-`;
-
-const MemberImage = styled.img`
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: ${({ theme }) => theme.text_primary};
+  img {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    margin-bottom: 4px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
-    @media only screen and (max-width: 600px) {
-        width: 32px;
-        height: 32px;
-    }
-`;
-
-const MemberName = styled.div`
-    font-size: 16px;
+    object-fit: cover;
+  }
+  span {
+    flex: 1;
     font-weight: 500;
-    width: 200px;
-    color: ${({ theme }) => theme.text_primary};
-    @media only screen and (max-width: 600px) {
-        font-size: 14px;
+  }
+  a {
+    color: ${({ theme }) => theme.text_secondary};
+    font-size: 18px;
+  }
+`
+
+const Actions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+`
+
+const ProjectDetails = ({ openModal, setOpenModal }) => {
+  const project = openModal?.project
+  const images = project?.gallery?.length ? project.gallery : project?.image ? [project.image] : []
+  const [slide, setSlide] = useState(0)
+  const [failed, setFailed] = useState({})
+  const close = () => setOpenModal({ state: false, project: null })
+
+  useEffect(() => {
+    const onKey = (e) => e.key === 'Escape' && setOpenModal({ state: false, project: null })
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prev
+      window.removeEventListener('keydown', onKey)
     }
-`;
+  }, [setOpenModal])
 
+  useEffect(() => {
+    if (images.length < 2) return
+    const t = setInterval(() => setSlide((s) => (s + 1) % images.length), 4000)
+    return () => clearInterval(t)
+  }, [images.length])
 
-const ButtonGroup = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin: 12px 0px;
-    gap: 12px;
-`;
+  if (!project) return null
 
-const Button = styled.a`
-    width: 100%;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.text_primary};
-    padding: 12px 16px;
-    border-radius: 8px;
-    background-color: ${({ theme }) => theme.primary};
-    ${({ dull, theme }) => dull && `
-        background-color: ${theme.bgLight};
-        color: ${theme.text_secondary};
-        &:hover {
-            background-color: ${({ theme }) => theme.bg + 99};
-        }
-    `}
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.5s ease;
-    &:hover {
-        background-color: ${({ theme }) => theme.primary + 99};
-    }
-    @media only screen and (max-width: 600px) {
-        font-size: 12px;
-    }
-`;
+  return (
+    <Overlay
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.2, delay: 0.05 } }}
+      transition={{ duration: 0.25 }}
+      onClick={close}
+    >
+      <Center>
+        <Panel
+          role="dialog"
+          aria-modal="true"
+          aria-label={project.title}
+          initial={{ opacity: 0, y: 40, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 24, scale: 0.97, transition: { duration: 0.18 } }}
+          transition={{ type: 'spring', stiffness: 300, damping: 30, mass: 0.8 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Close onClick={close} aria-label="Close" whileHover={{ rotate: 90 }} whileTap={{ scale: 0.9 }}>
+            <HiXMark />
+          </Close>
 
+          <Media>
+            {project.cover ? (
+              <ProjectCover project={project} />
+            ) : images.length === 0 || failed[slide] ? (
+              <Fallback>{project.title}</Fallback>
+            ) : (
+              <AnimatePresence initial={false}>
+                <motion.img
+                  key={images[slide]}
+                  src={images[slide]}
+                  alt={`${project.title} screenshot ${slide + 1}`}
+                  initial={{ opacity: 0, scale: 1.04 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  onError={() => setFailed((f) => ({ ...f, [slide]: true }))}
+                />
+              </AnimatePresence>
+            )}
+            {images.length > 1 && !project.cover && (
+              <Thumbs>
+                {images.map((_, i) => (
+                  <button key={i} aria-label={`Show screenshot ${i + 1}`} aria-current={i === slide} onClick={() => setSlide(i)} />
+                ))}
+              </Thumbs>
+            )}
+          </Media>
 
-const index = ({ openModal, setOpenModal }) => {
-    const project = openModal?.project;
-    return (
-        <Modal open={true} onClose={() => setOpenModal({ state: false, project: null })}>
-            <Container>
-                <Wrapper>
-                    <CloseRounded
-                        style={{
-                            position: "absolute",
-                            top: "10px",
-                            right: "20px",
-                            cursor: "pointer",
-                        }}
-                        onClick={() => setOpenModal({ state: false, project: null })}
-                    />
-                    <Image src={project?.image} />
-                    <Title>{project?.title}</Title>
-                    <Date>{project.date}</Date>
-                    <Tags>
-                        {project?.tags.map((tag) => (
-                            <Tag>{tag}</Tag>
-                        ))}
-                    </Tags>
-                    <Desc>{project?.description}</Desc>
-                    {project.member && (
-                        <>
-                            <Label>Members</Label>
-                            <Members>
-                                {project?.member.map((member) => (
-                                    <Member>
-                                        <MemberImage src={member.img} />
-                                        <MemberName>{member.name}</MemberName>
-                                        <a href={member.github} target="new" style={{textDecoration: 'none', color: 'inherit'}}>
-                                            <GitHub />
-                                        </a>
-                                        <a href={member.linkedin} target="new" style={{textDecoration: 'none', color: 'inherit'}}>
-                                            <LinkedIn />
-                                        </a>
-                                    </Member>
-                                ))}
-                            </Members>
-                        </>
-                    )}
-                    <ButtonGroup>
-                        <Button dull href={project?.github} target='new'>View Code</Button>
-                        <Button href={project?.webapp} target='new'>View Live App</Button>
-                    </ButtonGroup>
-                </Wrapper>
-            </Container>
+          <Content>
+            <div>
+              <Date>{project.date}</Date>
+              <Title>{project.title}</Title>
+            </div>
+            <Tags>
+              {project.tags?.map((tag) => (
+                <Chip key={tag}>{tag}</Chip>
+              ))}
+            </Tags>
+            <Desc>{project.description}</Desc>
 
-        </Modal>
-    )
+            {project.highlights?.length > 0 && (
+              <Highlights>
+                {project.highlights.map((h) => (
+                  <li key={h}>
+                    <HiCheckBadge /> {h}
+                  </li>
+                ))}
+              </Highlights>
+            )}
+
+            {project.note && (
+              <Note>
+                <HiLockClosed /> {project.note}
+              </Note>
+            )}
+
+            {project.member?.length > 0 && (
+              <>
+                <Label>Team</Label>
+                <Members>
+                  {project.member.map((m) => (
+                    <Member key={m.name}>
+                      <img src={m.img} alt={m.name} />
+                      <span>{m.name}</span>
+                      {m.github && <a href={m.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>}
+                      {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></a>}
+                    </Member>
+                  ))}
+                </Members>
+              </>
+            )}
+
+            <Actions>
+              {isLiveUrl(project.webapp) && (
+                <PrimaryButton href={project.webapp} target="_blank" rel="noopener noreferrer" whileHover={{ y: -2 }}>
+                  Live Demo <HiArrowUpRight />
+                </PrimaryButton>
+              )}
+              {project.github && (
+                <GhostButton href={project.github} target="_blank" rel="noopener noreferrer" whileHover={{ y: -2 }}>
+                  <FaGithub /> View Code
+                </GhostButton>
+              )}
+            </Actions>
+          </Content>
+        </Panel>
+      </Center>
+    </Overlay>
+  )
 }
 
-export default index
+export default ProjectDetails

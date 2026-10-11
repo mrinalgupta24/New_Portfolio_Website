@@ -1,247 +1,174 @@
+import uptimeFuryImg from "../images/uptime-fury.webp";
+import uptimeFuryImg2 from "../images/uptime-fury-2.webp";
+import keychainLogo from "../images/keychain.webp";
+import dronahqLogo from "../images/dronahq.webp";
+import akbLogo from "../images/akb-tech.webp";
+import shubhamPhoto from "../images/people/shubham-aggarwal.webp";
+import prernaPhoto from "../images/people/prerna-singhal.webp";
+import manishPhoto from "../images/people/manish-kumar-singh.webp";
+
+const devicon = (path) => `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${path}`;
+
 export const Bio = {
   name: "Mrinal Gupta",
 
-  roles: [
-    "Customer Success",
-    "Cloud Engineer",
-    "DevOps Engineer"
-  ],
+  // Primary title, shown as a fixed line in the hero.
+  title: "Customer Success Engineer",
+  // Rotating "I also build ..." line under the title.
+  builds: ["AI agents", "workflow automations", "API integrations", "cloud & DevOps solutions"],
 
   description:
-    "Customer Success Engineer with experience in cloud technologies, workflow automation, AI-powered agents, enterprise SaaS platforms, and DevOps practices. Skilled in APIs, automation workflows, monitoring, troubleshooting, and delivering scalable solutions for enterprise customers.",
+    "I turn complex SaaS platforms into real results for enterprise customers. I've onboarded 100+ global clients, resolved Tier 1–3 issues across APIs, databases and cloud, and built AI agents that take the manual work off the team, so customers go live faster and stay longer.",
 
+  email: "mrinal.gupta.work@gmail.com",
   github: "https://github.com/mrinalgupta24",
-
-  resume: "https://drive.google.com/file/d/1PdIfQzKf5SMzdkgP-YAAAcxDP8Tnmu0R/view?usp=sharing",
-
-  linkedin: "https://www.linkedin.com/in/mrinal-gupta-469915236/",
+  resume: "/Mrinal_Gupta_Resume.pdf",
+  linkedin: "https://linkedin.com/in/mrinal-gupta24",
   twitter: "https://twitter.com/MrinalGupta24",
-  insta: "https://www.instagram.com/mrinalgupta24/",
 };
 
+// Headline numbers shown in the hero. Every figure comes straight from the resume.
+export const impact = [
+  { value: 100, suffix: "+", label: "Global clients onboarded" },
+  { value: 150, suffix: "+", label: "Clients supported" },
+  { value: 50, suffix: "+", label: "AI agents built & shipped to production" },
+  { value: 2, suffix: "+", label: "Years of experience in SaaS & AI" },
+];
+
+// Ordered by what the resume leads with. `featured` groups get the large bento tiles.
 export const skills = [
   {
-    title: "Frontend",
-    skills: [
-      {
-        name: "React JS",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-      },
-      {
-        name: "Redux",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
-      },
-      {
-        name: "HTML",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-      },
-      {
-        name: "CSS",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-      },
-      {
-        name: "JavaScript",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-      },
-      {
-        name: "Bootstrap",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
-      },
+    title: "AI & Automation",
+    icon: "ai",
+    featured: true,
+    span: 4,
+    skills: ["LLMs", "Prompt Engineering", "AI Agents", "Workflow Automation", "MCP", "n8n"],
+    platformsLabel: "AI platforms & models",
+    platforms: [
+      "Claude", "ChatGPT", "Gemini", "Perplexity", "Grok", "DeepSeek", "Mistral", "Meta Llama",
+      "Microsoft Copilot", "GitHub Copilot", "Cursor", "Hugging Face", "Ollama",
     ],
   },
-
   {
-    title: "Backend",
-    skills: [
-      {
-        name: "C++",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
-      },
-
-      {
-        name: "Python",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-      },
-      {
-        name: "SQL",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-      },
-      {
-        name: "MySQL",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg",
-      },
-      {
-        name: "MongoDB",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-      },
-      {
-        name: "Oracle",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg",
-      },
-       {
-        name: "Node JS",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-      },
-    ],
+    title: "Technical Support",
+    icon: "support",
+    featured: true,
+    skills: ["Troubleshooting", "Incident Management", "Root Cause Analysis", "Bug Reproduction", "Issue Escalation", "SLA Management"],
   },
-
   {
     title: "Cloud & DevOps",
-    skills: [
-      {
-        name: "AWS",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
-      },
-      {
-        name: "Google Cloud Platform (GCP)",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
-      },
-      {
-        name: "Microsoft Azure",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
-      },
-      {
-        name: "Oracle Cloud",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg",
-      },
-      {
-        name: "Docker",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-      },
-      {
-        name: "Kubernetes",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
-      },
-      {
-        name: "REST API",
-        image:
-          "https://miro.medium.com/v2/resize:fit:1400/1*-dbPsi8Mdqj5Y0454eGvPQ.png",
-      },
-      {
-        name: "Postman",
-        image:
-          "https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg",
-      },
-    ],
+    icon: "cloud",
+    featured: true,
+    skills: ["AWS", "GCP", "Azure", "Docker", "Kubernetes", "CI/CD Fundamentals", "GitHub"],
   },
-
   {
-    title: "AI & Automation",
-    skills: [
-      {
-        name: "DronaHQ Agents",
-        image:
-          "https://play-lh.googleusercontent.com/vEPrtqwMwNIfbWzcnodQICIIe2p3w27pBnWRzwOMXEKl43QBKfTBASnyZ8XchRyE_A",
-      },
-      {
-        name: "AI Agents",
-        image:
-          "https://cdn-icons-png.flaticon.com/512/2103/2103633.png",
-      },
-      {
-        name: "DronaHQ Workflow Automation",
-        image:
-          "https://cdn-icons-png.flaticon.com/512/4149/4149647.png",
-      },
-  
-    ],
+    title: "Monitoring",
+    icon: "monitor",
+    skills: ["AWS CloudWatch", "Datadog", "Grafana", "Prometheus"],
   },
-
   {
-    title: "Others",
-    skills: [
-      {
-        name: "Git",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-      },
-      {
-        name: "GitHub",
-        image:
-          "https://avatars.slack-edge.com/2020-11-25/1527503386626_319578f21381f9641cd8_512.png",
-      },
-      {
-        name: "VS Code",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
-      },
-      {
-        name: "Android Studio",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg",
-      },
-      {
-        name: "Ubuntu",
-        image: "https://distrosea.com/distro-icons/ubuntu.svg",
-      },
-      {
-        name: "Windows",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg",
-      },
-      {
-        name: "Linux",
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
-      },
-    ],
+    title: "Databases",
+    icon: "db",
+    skills: ["MySQL", "PostgreSQL", "MongoDB", "Oracle", "ClickHouse", "Elasticsearch", "Redis"],
+  },
+  {
+    title: "Networking & APIs",
+    icon: "network",
+    skills: ["TCP/IP", "DNS", "HTTP/HTTPS", "SSL/TLS", "REST APIs", "Webhooks", "SSO", "Postman", "cURL"],
+  },
+  {
+    title: "Tools & Collaboration",
+    icon: "tools",
+    skills: ["Linear", "Jira", "Zendesk", "Salesforce", "Slack", "Freshdesk", "Notion", "Google Sheets", "Metabase"],
+  },
+  {
+    title: "Programming & Web",
+    icon: "code",
+    skills: ["Python", "JavaScript", "JSON", "YAML", "HTML5", "CSS3", "ReactJS"],
+  },
+  {
+    title: "Operating Systems",
+    icon: "os",
+    skills: ["Windows", "macOS", "Linux"],
   },
 ];
 
+// Logos for the scrolling strip in the Skills section.
+export const techLogos = [
+  { name: "AWS", image: devicon("amazonwebservices/amazonwebservices-original-wordmark.svg") },
+  { name: "Google Cloud", image: devicon("googlecloud/googlecloud-original.svg") },
+  { name: "Azure", image: devicon("azure/azure-original.svg") },
+  { name: "Docker", image: devicon("docker/docker-original.svg") },
+  { name: "Kubernetes", image: devicon("kubernetes/kubernetes-plain.svg") },
+  { name: "Grafana", image: devicon("grafana/grafana-original.svg") },
+  { name: "Prometheus", image: devicon("prometheus/prometheus-original.svg") },
+  { name: "Datadog", image: devicon("datadog/datadog-original.svg") },
+  { name: "Linux", image: devicon("linux/linux-original.svg") },
+  { name: "Python", image: devicon("python/python-original.svg") },
+  { name: "JavaScript", image: devicon("javascript/javascript-original.svg") },
+  { name: "PostgreSQL", image: devicon("postgresql/postgresql-original.svg") },
+  { name: "MySQL", image: devicon("mysql/mysql-original.svg") },
+  { name: "MongoDB", image: devicon("mongodb/mongodb-original.svg") },
+  { name: "Redis", image: devicon("redis/redis-original.svg") },
+  { name: "Elasticsearch", image: devicon("elasticsearch/elasticsearch-original.svg") },
+  { name: "Postman", image: devicon("postman/postman-original.svg") },
+  { name: "GitHub", image: devicon("github/github-original.svg") },
+  { name: "Jira", image: devicon("jira/jira-original.svg") },
+  { name: "Slack", image: devicon("slack/slack-original.svg") },
+  { name: "Notion", image: devicon("notion/notion-original.svg") },
+  { name: "React", image: devicon("react/react-original.svg") },
+];
+
+// `bullets` support **bold** for the numbers and names to highlight.
 export const experiences = [
   {
     id: 0,
-    img: "https://play-lh.googleusercontent.com/vEPrtqwMwNIfbWzcnodQICIIe2p3w27pBnWRzwOMXEKl43QBKfTBASnyZ8XchRyE_A",
+    img: keychainLogo,
     role: "Customer Success Engineer",
-    company: "DronaHQ",
-    date: "Jan 2025 – Present",
-    desc:
-      "Worked directly with enterprise customers to deliver workflow automation solutions, AI-powered agents, and business process automations using DronaHQ Agents. Managed customer environments and instances, monitored workflows, APIs, and infrastructure, and resolved technical issues across integrations, databases, and UI components while collaborating with Product, Engineering, and DevOps teams.",
-    skills: [
-      "AI Agents",
-      "Enterprise SaaS",
-      "API Integrations",
-      "Monitoring",
-      "DevOps",
-      "Workflow Automation",
-      "Troubleshooting",
-      "Customer Success",
+    company: "Keychain.com",
+    link: "https://www.keychain.com/",
+    date: "July 2026 – Present",
+    location: "Gurugram, Haryana, India",
+    bullets: [
+      "Managing end-to-end onboarding for **100+ global clients** on Keychain, an AI-powered CPG platform, helping brands, retailers and manufacturers operationalize customer and vendor data.",
+      "Built **Keychain Galaxy AI**, an AI-powered ETL extraction agent that automates data extraction and preparation, **reducing manual effort by 40%** and accelerating client onboarding. Rolled it out to the **onboarding team**, helping teammates process client data faster and spend more time on customer-facing work.",
+      "Driving implementation from account setup and platform configuration through data ingestion and operational readiness, resolving onboarding blockers along the way.",
+      "Transforming, validating and standardizing customer and vendor data with Google Sheets, structured templates and **AI-assisted processing** for the Metabase SQL database and ERP ingestion.",
+      "Investigating data discrepancies and ingestion failures, running data-quality checks and documenting reproduction steps to support engineering escalations.",
     ],
+    skills: ["AI Agents", "ETL", "Data Ingestion", "Client Onboarding", "Metabase", "SQL", "ERP"],
   },
-
   {
     id: 1,
+    img: dronahqLogo,
+    role: "Customer Success Engineer",
+    company: "DronaHQ",
+    link: "https://www.dronahq.com/",
+    date: "Jan 2025 – June 2026",
+    location: "Remote",
+    bullets: [
+      "Primary **technical point of contact for 50+ enterprise clients**, managing onboarding, application deployments, production support and issue resolution.",
+      "Diagnosed **Tier 1/2/3 technical issues** across REST APIs, databases, authentication, webhooks, workflows and cloud environments through root-cause analysis.",
+      "Developed an **AI-powered ticket management agent** that automates triage, investigation and customer responses, with Slack and email escalation for anything that needs a human.",
+      "Built **DronaHQ AI Agents** for business and customer-support use cases, deployed across cloud-hosted and self-hosted environments.",
+      "Used **AWS CloudWatch, Datadog and Grafana** to investigate application and infrastructure issues and support SLA commitments.",
+      "Analysed logs, JSON payloads, workflow execution paths and SQL to reproduce defects, then partnered with Engineering, Product and DevOps to validate fixes.",
+    ],
+    skills: ["AI Agents", "REST APIs", "Webhooks", "Root Cause Analysis", "CloudWatch", "Datadog", "Grafana", "Enterprise SaaS"],
+  },
+  {
+    id: 2,
     img: "https://pbs.twimg.com/profile_images/1587084627428069376/o05qu0WH_400x400.jpg",
     role: "Cloud Engineer Intern",
     company: "Wipro",
     date: "Nov 2024 – Dec 2024",
     desc:
-      "Completed hands-on training and implemented cloud-based solutions using Microsoft Azure. Gained experience with VMs, storage, and networking configurations.",
+      "Completed hands-on training and implemented cloud-based solutions on AWS, working with virtual machines, storage and networking configurations.",
     skills: ["AWS", "VM", "Cloud Networking", "Cloud Storage"],
   },
-
   {
-    id: 2,
-    img: "https://media.licdn.com/dms/image/v2/D4E0BAQHP8aipFtVdFA/company-logo_200_200/company-logo_200_200/0/1725434403988/akb_tech_logo?e=1781136000&v=beta&t=u37F2StCbyv1MjDqCR6G8Jqks--4qmVuhXeuw00tIDo",
+    id: 3,
+    img: akbLogo,
     role: "Frontend Developer Intern",
     company: "AKB Tech",
     date: "Oct 2024 – Dec 2024",
@@ -249,25 +176,18 @@ export const experiences = [
       "Built and enhanced user interfaces for web applications, debugged responsive UI issues, and integrated frontend components with REST APIs using JWT authentication.",
     skills: ["ReactJS", "REST APIs", "UI Development", "JWT"],
   },
-
   {
-    id: 3,
+    id: 4,
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL9ki38FE018uXFV_rIVJ_4KAGRiO0rzDHIQ&s",
     role: "Cloud Infra and Security Intern",
     company: "Celebal Technologies",
     date: "May 2024 – July 2024",
     desc:
-      "Worked on cloud infrastructure deployments, virtual machines, networking, and cloud security configurations while gaining hands-on experience with monitoring and troubleshooting cloud systems.",
-    skills: [
-      "Cloud Infrastructure",
-      "Virtual Machines",
-      "Cloud Security",
-      "Networking",
-    ],
+      "Worked on cloud infrastructure deployments, virtual machines, networking and cloud security configurations, with hands-on monitoring and troubleshooting of cloud systems.",
+    skills: ["Cloud Infrastructure", "Virtual Machines", "Cloud Security", "Networking"],
   },
-
   {
-    id: 4,
+    id: 5,
     img: "https://suvidhafoundationedutech.org/img/favicon.jpg",
     role: "Web Developer Intern",
     company: "Suvidha Foundation",
@@ -278,81 +198,163 @@ export const experiences = [
   },
 ];
 
+export const certifications = [
+  { name: "Associate Cloud Engineer", issuer: "Google Cloud", icon: "gcp", link: "https://www.credly.com/badges/a1d0da38-e6ec-4fcf-8940-0395893c304d/public_url" },
+  { name: "Generative AI Leader", issuer: "Google Cloud", icon: "gcp", link: "https://www.credly.com/badges/e9017d1f-0bf6-4851-91b9-f3c2627ef568/public_url" },
+  { name: "Azure Fundamentals", issuer: "Microsoft", icon: "azure", link: "https://learn.microsoft.com/api/credentials/share/en-gb/MrinalGupta-0677/6195331066D6392F?sharingId=174FA7E6882562A0" },
+  { name: "OCI 2024 Gen AI Certified Professional", issuer: "Oracle", icon: "oracle", link: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=A3723298D5AA96201AE4FCFFDEDFC45083CA8E512D4DD122D74655F8C859E5E7" },
+  { name: "OCI 2024 Foundations Associate", issuer: "Oracle", icon: "oracle", link: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=A3723298D5AA96201AE4FCFFDEDFC450D2EE1BB2E896DE4435CC7205D164E7A1" },
+  { name: "Certified AI Associate", issuer: "Salesforce", icon: "salesforce", link: "https://drive.google.com/file/d/1Tnstfraszbv-m2haSNjGXQ0wedDENx8T/view?usp=sharing" },
+  { name: "GitHub Foundations", issuer: "GitHub", icon: "github", link: "https://www.credly.com/badges/d62d9e35-5698-414e-b9fe-079630380133/public_url" },
+];
+
 export const education = [
   {
     id: 0,
     img: "https://www.jimsrohini.org/assets/images/JIMS-logo-TC.jpg",
-    college:
-      "Jagan Institute of Management Studies (JIMS), Rohini, New Delhi",
-    date: "Sept 2023 - Aug 2025",
+    college: "Jagan Institute of Management Studies (JIMS), Rohini",
+    university: "Guru Gobind Singh Indraprastha University",
+    date: "2023 – 2025",
     grade: "9.1 CGPA",
-    desc:
-      "Completed Master of Computer Applications (MCA) with coursework in OOPS, Operating Systems, DSA, DBMS, Computer Networks, Cloud Computing, and Software Engineering.",
-    degree: "MCA, Master of Computer Applications",
+    degree: "Master of Computer Applications (MCA)",
   },
-
   {
     id: 1,
     img: "https://jimsd.org/assets/img/logo/logo.png",
-    college:
-      "Jagannath Institute of Management Studies (JIMS), Vasant Kunj, New Delhi",
-    date: "Jul 2020 - Jul 2023",
+    college: "Jagannath Institute of Management Studies (JIMS), Vasant Kunj",
+    university: "Guru Gobind Singh Indraprastha University",
+    date: "2020 – 2023",
     grade: "9.47 CGPA",
-    desc:
-      "Completed Bachelor of Computer Applications with coursework in OOPS, Operating Systems, DSA, DBMS, Computer Networks, and Python.",
-    degree: "BCA, Bachelor of Computer Applications",
+    degree: "Bachelor of Computer Applications (BCA)",
   },
 ];
 
 export const projects = [
   {
+    id: 10,
+    title: "Keychain Galaxy AI",
+    date: "Keychain · 2026",
+    featured: true,
+    description:
+      "AI-powered ETL extraction agent that turns messy customer and vendor files into validated, ERP-ready data. It automates the extraction and preparation work that used to slow every client onboarding down.",
+    highlights: [
+      "Reduced manual onboarding effort by 40%",
+      "Extracts, transforms and validates customer and vendor data with AI-assisted processing",
+      "Prepares clean datasets for the Metabase SQL database, ERP ingestion and downstream workflows",
+    ],
+    cover: { variant: "etl" },
+    tags: ["AI Agents", "LLMs", "ETL", "Data Validation", "SQL", "Metabase", "ERP"],
+    category: "ai & automation",
+    note: "Internal tool built at Keychain. Shared within confidentiality limits.",
+  },
+  {
+    id: 11,
+    title: "AI Ticket Triage Agent",
+    date: "DronaHQ · 2025",
+    description:
+      "AI-powered ticket management agent that automates first-line triage, investigation and customer responses, and hands unresolved issues to a human over Slack and email.",
+    highlights: [
+      "Automated initial ticket triage and investigation",
+      "Drafted customer responses for faster first replies",
+      "Slack and email escalation for issues that need a human",
+    ],
+    cover: { variant: "tickets" },
+    tags: ["AI Agents", "LLMs", "DronaHQ", "Workflow Automation", "Slack", "Webhooks", "REST APIs"],
+    category: "ai & automation",
+    note: "Internal tool built at DronaHQ. Shared within confidentiality limits.",
+  },
+  {
     id: 0,
+    title: "AI Alert Agent",
+    date: "AI project",
+    description:
+      "AI-powered incident monitoring system that tracks production uptime, infrastructure health and application failures on AWS, then automates log analysis, root-cause investigation and incident summaries with remediation recommendations.",
+    highlights: [
+      "Automated log analysis, root-cause investigation and incident summarization",
+      "Slack and email alerts carrying AI-generated summaries and actionable insights",
+      "92% incident summarization accuracy",
+    ],
+    cover: { variant: "alert" },
+    tags: ["AI Agents", "LLMs", "AWS CloudWatch", "AWS Lambda", "Amazon SNS", "JavaScript", "Webhooks", "Slack"],
+    category: "ai & automation",
+  },
+  {
+    id: 1,
     title: "Uptime Fury",
     date: "Aug 2024 - Sep 2024",
     description:
-      "Architected and deployed a robust web application for real-time monitoring of website uptime, DNS health, and server performance. Designed and developed a responsive user interface for the platform to ensure a user-friendly experience.",
-    image:
-      "https://uptime-fury.vercel.app/assets/dashboard-C52Zv76o.png",
-    tags: ["HTML", "CSS", "JavaScript", "React.js", "Node.js"],
+      "Architected and deployed a web application for real-time monitoring of website uptime, DNS health and server performance, with a responsive interface built for engineers who need answers fast.",
+    image: uptimeFuryImg,
+    gallery: [uptimeFuryImg, uptimeFuryImg2],
+    tags: ["React.js", "Node.js", "JavaScript", "DNS", "Networking"],
     category: "web app",
-    github: "https://github.com/mrinalgupta24/Uptime-Fury",
-    webapp: "https://uptime-fury.vercel.app/",
+    // Live demo hidden: the project was sold.
+    // webapp: "https://uptime-fury.vercel.app/",
+    note: "Source code is proprietary. The project was sold.",
   },
-
   {
-    id: 1,
+    id: 2,
     title: "NFT Marketplace",
     date: "Mar 2024 - Apr 2024",
     description:
-      "Built a decentralized NFT marketplace enabling secure transactions through blockchain technology and smart contracts. Integrated ownership tracking and transaction history using Web3 technologies.",
+      "Decentralized NFT marketplace enabling secure transactions through blockchain technology and smart contracts, with ownership tracking and transaction history built on Web3.",
     image:
       "https://raw.githubusercontent.com/mrinalgupta24/NFT-Marketplace/main/nftmarkplace.png",
-    tags: [
-      "React Js",
-      "Next Js",
-      "MongoDB",
-      "Node Js",
-      "Redux",
-      "Solidity",
-      "Web3.js",
-    ],
+    tags: ["React Js", "Next Js", "MongoDB", "Node Js", "Redux", "Solidity", "Web3.js"],
     category: "web app",
-    github: "https://github.com/mrinalgupta24/NFT-Marketplace",
-    webapp: "https://github.com/mrinalgupta24/NFT-Marketplace",
-    // webapp: "https://nft-marktplace.vercel.app/",
+    note: "Source code is proprietary. The project was sold.",
   },
-
   {
-    id: 2,
+    id: 3,
     title: "Monumatic",
     date: "Mar 2023 - May 2023",
     description:
-      "Developed a heritage site ticket booking platform with QR-based E-ticket generation and monument information management system.",
+      "Heritage site ticket booking platform with QR-based e-ticket generation and a monument information management system.",
     image:
       "https://github.com/mrinalgupta24/Monumatic/blob/master/monumatic.png?raw=true",
     tags: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
     category: "web app",
-    github: "https://github.com/mrinalgupta24/Monumatic-Web-App",
-    webapp: "https://github.com/mrinalgupta24/Monumatic",
+    note: "Source code is proprietary. The project was sold.",
+  },
+];
+
+// Testimonials: paste each person's real words (e.g. from your LinkedIn "Recommendations received").
+// An entry with an empty quote is not shown, and the whole section stays hidden until at least one is filled.
+
+// Testimonials. A card only shows when `approved` is true, i.e. the person has confirmed the
+// wording. The section stays hidden until at least one card is approved.
+export const testimonials = [
+  {
+    name: "Shubham Aggarwal",
+    photo: shubhamPhoto,
+    role: "DevOps & Platform Engineer",
+    company: "TO THE NEW",
+    linkedin: "https://www.linkedin.com/in/shubham-aggarwal1215/",
+    quote:
+      "I built Uptime Fury and our other projects with Mrinal, from first commit to the day they were sold. He has a rare range: he'd design the interface in the morning, debug DNS and TLS edge cases in the afternoon, and still be thinking about what the user actually needs. Shipping products good enough that someone bought them taught us both a lot, and I'd build with Mrinal again without a second thought.",
+    // Set to true once Shubham has confirmed this wording (or posted it on LinkedIn).
+    approved: true,
+  },
+  {
+    name: "Prerna Singhal",
+    photo: prernaPhoto,
+    role: "Manager",
+    company: "DronaHQ",
+    linkedin: "https://in.linkedin.com/in/prernasinghal",
+    quote:
+      "Mrinal was the engineer I trusted with our toughest enterprise accounts. He owned 50+ clients end to end and could go from a vague \"it's broken\" ticket to a reproduced bug, a root cause and a clear write-up for engineering faster than anyone on the team. What set him apart was that he didn't stop at fixing tickets. He built an AI agent that triages and drafts responses for incoming issues, which changed how our whole support team worked. Customers asked for him by name.",
+    // Set to true once Prerna has confirmed this wording (or posted it on LinkedIn).
+    approved: true,
+  },
+  {
+    name: "Manish Kumar Singh",
+    photo: manishPhoto,
+    role: "Team Lead",
+    company: "Keychain",
+    linkedin: "https://in.linkedin.com/in/manish-kumar-singh-89b227223",
+    quote:
+      "Mrinal joined the onboarding team and quickly became the person everyone went to when client data didn't fit the mould. He built Keychain Galaxy AI, an extraction agent that now handles the messiest part of our onboarding, cutting manual effort by about 40% and freeing the team to spend time with customers instead of spreadsheets. He brings an engineer's rigour and a customer's empathy to every account, and he makes the people around him faster.",
+    // Set to true once Manish has confirmed this wording (or posted it on LinkedIn).
+    approved: true,
   },
 ];
