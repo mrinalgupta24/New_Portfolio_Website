@@ -13,17 +13,19 @@ import { ReactComponent as HuggingFace } from '../images/ai/huggingface-color.sv
 import { ReactComponent as Ollama } from '../images/ai/ollama.svg'
 import { ReactComponent as N8n } from '../images/ai/n8n-color.svg'
 import { ReactComponent as Mcp } from '../images/ai/mcp.svg'
+import { ReactComponent as GroqIcon } from '../images/ai/groq.svg'
 import {
   SiOracle, SiClickhouse, SiLinear, SiZendesk, SiSalesforce, SiGooglesheets, SiMetabase, SiHtml5, SiCss3,
   SiYaml, SiJson, SiCurl, SiPostman, SiMysql, SiPostgresql, SiMongodb, SiElasticsearch, SiRedis, SiPython,
   SiJavascript, SiJira, SiSlack, SiNotion, SiReact, SiAmazonaws, SiGooglecloud, SiMicrosoftazure, SiDocker,
   SiKubernetes, SiGithub, SiGrafana, SiPrometheus, SiDatadog, SiAmazoncloudwatch, SiLinux, SiWindows, SiApple,
-  SiGithubactions,
+  SiGithubactions, SiVite, SiFramer, SiStyledcomponents, SiThreedotjs, SiVercel, SiCloudflare, SiNodedotjs, SiWebgl,
 } from 'react-icons/si'
 import {
   HiSparkles, HiChatBubbleLeftRight, HiCpuChip, HiArrowPath, HiCodeBracketSquare, HiWrench,
   HiExclamationTriangle, HiMagnifyingGlassCircle, HiBugAnt, HiArrowTrendingUp, HiClock, HiGlobeAlt,
-  HiServerStack, HiLockClosed, HiArrowsRightLeft, HiLink, HiKey, HiLifebuoy,
+  HiServerStack, HiLockClosed, HiArrowsRightLeft, HiLink, HiKey, HiLifebuoy, HiSignal, HiCursorArrowRays, HiShieldCheck,
+  HiCloudArrowUp,
 } from 'react-icons/hi2'
 
 // Every skill chip name -> icon + brand colour. A null colour follows the theme text colour,
@@ -51,6 +53,22 @@ export const skillIcons = {
   Cursor: { Icon: Cursor, color: null },
   'Hugging Face': { Icon: HuggingFace, color: null },
   Ollama: { Icon: Ollama, color: null },
+  Groq: { Icon: GroqIcon, color: '#F55036' },
+
+  // Used to build this portfolio
+  Vercel: { Icon: SiVercel, color: null },
+  Cloudflare: { Icon: SiCloudflare, color: '#F38020' },
+  'Serverless Functions': { Icon: HiCloudArrowUp, color: '#a78bfa' },
+  'Better Stack': { Icon: HiSignal, color: '#34d399' },
+  'Microsoft Clarity': { Icon: HiCursorArrowRays, color: '#4F9BF7' },
+  'Uptime Monitoring': { Icon: HiSignal, color: '#f4a261' },
+  'Web Security Headers': { Icon: HiShieldCheck, color: '#34d399' },
+  Vite: { Icon: SiVite, color: '#A78BFA' },
+  'Node.js': { Icon: SiNodedotjs, color: '#5FA04E' },
+  'styled-components': { Icon: SiStyledcomponents, color: '#DB7093' },
+  'Framer Motion': { Icon: SiFramer, color: null },
+  'Three.js': { Icon: SiThreedotjs, color: null },
+  WebGL: { Icon: SiWebgl, color: '#E34F26' },
 
   // Technical Support
   Troubleshooting: { Icon: HiWrench, color: '#f4a261' },

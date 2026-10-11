@@ -1,3 +1,4 @@
+import { waitUntil } from '@vercel/functions'
 import { answer } from './_lib/assistant.js'
 
 // Vercel serverless function: POST /api/chat  { messages: [{ role: 'user' | 'assistant', content }] }
@@ -10,13 +11,18 @@ export async function POST(request) {
   }
 
   try {
-    const { status, body } = await answer({
+    const { status, body, background } = await answer({
       messages: payload.messages,
       ip: (request.headers.get('x-forwarded-for') || '').split(',')[0].trim(),
       origin: request.headers.get('origin'),
       host: request.headers.get('host'),
       env: process.env,
+      geo: {
+        country: request.headers.get('x-vercel-ip-country') || '',
+        city: decodeURIComponent(request.headers.get('x-vercel-ip-city') || ''),
+      },
     })
+    if (background) waitUntil(background())
     return Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } })
   } catch (err) {
     console.error('chat function failed', err)

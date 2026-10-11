@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { AnimatePresence, motion } from 'framer-motion'
 import { HiSparkles, HiXMark, HiPaperAirplane, HiArrowPath } from 'react-icons/hi2'
-import avatar from '../../images/mrinalgupta-avatar.webp'
+import Robot from './Robot'
 import { Bio } from '../../data/constants'
 
 // Shown only once the server has a Gemini key (set VITE_ASSISTANT_ENABLED=true alongside GEMINI_API_KEY).
@@ -56,12 +56,14 @@ const Launcher = styled(motion.button)`
   background: ${({ theme }) => theme.gradient};
   box-shadow: 0 14px 36px -12px ${({ theme }) => theme.accent};
   animation: ${pulse} 2.6s infinite;
-  img {
-    width: 38px;
-    height: 38px;
+  .bot {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.85);
-    object-fit: cover;
+    background: rgba(16, 16, 26, 0.55);
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
   }
   @media (max-width: 520px) {
     right: 14px;
@@ -92,11 +94,11 @@ const Panel = styled(motion.section)`
   -webkit-backdrop-filter: saturate(160%) blur(22px);
   box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.85);
   @media (max-width: 520px) {
-    right: 8px;
-    left: 8px;
-    bottom: 8px;
+    /* Pin to all four edges instead of computing a height from the viewport: Safari's toolbars
+       and scrollbars make 100vh/100dvh larger than the area fixed elements actually get. */
+    inset: 8px;
     width: auto;
-    height: calc(100svh - 16px);
+    height: auto;
   }
 `
 
@@ -142,18 +144,54 @@ const Header = styled.header`
 `
 
 const HeadAvatar = styled.div`
-  width: 42px;
-  height: 42px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
   flex-shrink: 0;
-  padding: 2px;
   border-radius: 50%;
   background: ${({ theme }) => theme.gradient};
-  img {
-    width: 100%;
-    height: 100%;
+  box-shadow: 0 6px 18px -8px ${({ theme }) => theme.accent};
+`
+
+const pop = keyframes`
+  0% { opacity: 0; transform: translateY(6px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+`
+
+const Hello = styled.div`
+  position: fixed;
+  right: 22px;
+  bottom: 86px;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px 10px 14px;
+  border-radius: 16px 16px 4px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.text_primary};
+  background: rgba(22, 22, 36, 0.95);
+  border: 1px solid ${({ theme }) => theme.borderStrong};
+  box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.8);
+  animation: ${pop} 0.35s ease-out both;
+  cursor: pointer;
+  button {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border: none;
     border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #10101a;
+    background: rgba(255, 255, 255, 0.08);
+    color: ${({ theme }) => theme.text_secondary};
+    cursor: pointer;
+    font-size: 13px;
+  }
+  @media (max-width: 520px) {
+    right: 14px;
+    bottom: 76px;
   }
 `
 
@@ -323,8 +361,15 @@ const Footnote = styled.p`
 /* ---------- tiny formatter: **bold**, bullets, links, emails ---------- */
 
 const inline = (text, key) =>
-  text.split(/(\*\*[^*]+\*\*|[\w.+-]+@[\w-]+\.[\w.]+|https?:\/\/[^\s)]+|(?:linkedin|github)\.com\/[^\s),]+)/g).map((part, i) => {
+  text.split(/(\[[^\]]+\]\(https?:\/\/[^)\s]+\)|\*\*[^*]+\*\*|[\w.+-]+@[\w-]+\.[\w.]+|https?:\/\/[^\s)]+|(?:linkedin|github)\.com\/[^\s),]+)/g).map((part, i) => {
     if (!part) return null
+    const md = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/)
+    if (md)
+      return (
+        <a key={`${key}-${i}`} href={md[2]} target="_blank" rel="noopener noreferrer">
+          {md[1]}
+        </a>
+      )
     if (part.startsWith('**')) return <strong key={`${key}-${i}`}>{part.slice(2, -2)}</strong>
     if (/^[\w.+-]+@[\w-]+\.[\w.]+$/.test(part)) return <a key={`${key}-${i}`} href={`mailto:${part}`}>{part}</a>
     if (/^(https?:\/\/|linkedin\.com|github\.com)/.test(part)) {
@@ -367,6 +412,7 @@ const AssistantWidget = () => {
   const [messages, setMessages] = useState([GREETING])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [hello, setHello] = useState(false)
   const listRef = useRef(null)
   const inputRef = useRef(null)
   const pendingQuestion = useRef(null)
@@ -397,6 +443,27 @@ const AssistantWidget = () => {
     }
   }
 
+  // Say hi once per visit, a few seconds after load.
+  useEffect(() => {
+    let seen = false
+    try {
+      seen = sessionStorage.getItem('robot-hello') === '1'
+    } catch {}
+    if (seen) return
+    const show = setTimeout(() => setHello(true), 3500)
+    const hide = setTimeout(() => setHello(false), 13500)
+    return () => {
+      clearTimeout(show)
+      clearTimeout(hide)
+    }
+  }, [])
+  const dismissHello = () => {
+    setHello(false)
+    try {
+      sessionStorage.setItem('robot-hello', '1')
+    } catch {}
+  }
+
   // Open from anywhere (command palette, buttons), optionally with a question to ask straight away.
   useEffect(() => {
     const onOpen = (e) => {
@@ -413,7 +480,9 @@ const AssistantWidget = () => {
       pendingQuestion.current = null
       send(q)
     }
-    if (open) setTimeout(() => inputRef.current?.focus(), 250)
+    // Auto-focus only with a real keyboard: on phones it pops the on-screen keyboard and shifts the page.
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    if (open && finePointer) setTimeout(() => inputRef.current?.focus({ preventScroll: true }), 250)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open])
 
@@ -432,12 +501,36 @@ const AssistantWidget = () => {
 
   return (
     <>
+      {hello && !open && (
+        <Hello
+          role="status"
+          onClick={() => {
+            dismissHello()
+            setOpen(true)
+          }}
+        >
+          Hi! 👋 Ask me about Mrinal
+          <button
+            type="button"
+            aria-label="Dismiss"
+            onClick={(e) => {
+              e.stopPropagation()
+              dismissHello()
+            }}
+          >
+            ×
+          </button>
+        </Hello>
+      )}
       <AnimatePresence>
         {!open && (
           <Launcher
             key="launcher"
-            onClick={() => setOpen(true)}
-            aria-label="Ask Mrinal's AI"
+            onClick={() => {
+              dismissHello()
+              setOpen(true)
+            }}
+            aria-label="Ask my AI, Mrinal's assistant"
             initial={{ opacity: 0, scale: 0.6, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.6 }}
@@ -445,7 +538,9 @@ const AssistantWidget = () => {
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.95 }}
           >
-            <img src={avatar} alt="" width={38} height={38} />
+            <span className="bot">
+              <Robot size={34} />
+            </span>
             <span className="label">Ask my AI</span>
           </Launcher>
         )}
@@ -465,7 +560,7 @@ const AssistantWidget = () => {
           >
             <Header>
               <HeadAvatar>
-                <img src={avatar} alt="" width={38} height={38} />
+                <Robot size={36} waveEvery={5} />
               </HeadAvatar>
               <div className="who">
                 <strong>
@@ -536,7 +631,10 @@ const AssistantWidget = () => {
                 <HiPaperAirplane />
               </button>
             </Composer>
-            <Footnote>AI can make mistakes. For anything important, email {Bio.email}.</Footnote>
+            <Footnote>
+              AI can make mistakes. Questions are logged anonymously to improve answers. For anything important, email{' '}
+              {Bio.email}.
+            </Footnote>
           </Panel>
         )}
       </AnimatePresence>

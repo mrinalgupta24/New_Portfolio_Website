@@ -77,7 +77,7 @@ const Navbar = () => {
         </NavItems>
 
         <Actions>
-          <SearchButton onClick={openPalette} aria-label="Open command palette">
+          <SearchButton onClick={openPalette} aria-label={`Search, open command palette (${isMac ? '⌘' : 'Ctrl'} K)`}>
             <HiMagnifyingGlass />
             <span className="kbd">{isMac ? '⌘' : 'Ctrl'} K</span>
           </SearchButton>

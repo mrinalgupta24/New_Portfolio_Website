@@ -24,6 +24,7 @@ export const Bio = {
 
   email: "mrinal.gupta.work@gmail.com",
   github: "https://github.com/mrinalgupta24",
+  status: "/status",
   resume: "/Mrinal_Gupta_Resume.pdf",
   linkedin: "https://linkedin.com/in/mrinal-gupta24",
   twitter: "https://twitter.com/MrinalGupta24",
@@ -47,7 +48,7 @@ export const skills = [
     skills: ["LLMs", "Prompt Engineering", "AI Agents", "Workflow Automation", "MCP", "n8n"],
     platformsLabel: "AI platforms & models",
     platforms: [
-      "Claude", "ChatGPT", "Gemini", "Perplexity", "Grok", "DeepSeek", "Mistral", "Meta Llama",
+      "Claude", "ChatGPT", "Gemini", "Groq", "Meta Llama", "Perplexity", "Grok", "DeepSeek", "Mistral",
       "Microsoft Copilot", "GitHub Copilot", "Cursor", "Hugging Face", "Ollama",
     ],
   },
@@ -61,12 +62,12 @@ export const skills = [
     title: "Cloud & DevOps",
     icon: "cloud",
     featured: true,
-    skills: ["AWS", "GCP", "Azure", "Docker", "Kubernetes", "CI/CD Fundamentals", "GitHub"],
+    skills: ["AWS", "GCP", "Azure", "Docker", "Kubernetes", "CI/CD Fundamentals", "GitHub", "Vercel", "Cloudflare", "Serverless Functions"],
   },
   {
     title: "Monitoring",
     icon: "monitor",
-    skills: ["AWS CloudWatch", "Datadog", "Grafana", "Prometheus"],
+    skills: ["AWS CloudWatch", "Datadog", "Grafana", "Prometheus", "Better Stack", "Microsoft Clarity", "Uptime Monitoring"],
   },
   {
     title: "Databases",
@@ -76,7 +77,7 @@ export const skills = [
   {
     title: "Networking & APIs",
     icon: "network",
-    skills: ["TCP/IP", "DNS", "HTTP/HTTPS", "SSL/TLS", "REST APIs", "Webhooks", "SSO", "Postman", "cURL"],
+    skills: ["TCP/IP", "DNS", "HTTP/HTTPS", "SSL/TLS", "REST APIs", "Webhooks", "SSO", "Postman", "cURL", "Web Security Headers"],
   },
   {
     title: "Tools & Collaboration",
@@ -86,7 +87,7 @@ export const skills = [
   {
     title: "Programming & Web",
     icon: "code",
-    skills: ["Python", "JavaScript", "JSON", "YAML", "HTML5", "CSS3", "ReactJS"],
+    skills: ["Python", "JavaScript", "JSON", "YAML", "HTML5", "CSS3", "ReactJS", "Vite", "Node.js", "styled-components", "Framer Motion", "Three.js", "WebGL"],
   },
   {
     title: "Operating Systems",
@@ -359,21 +360,17 @@ export const testimonials = [
   },
 ];
 
-// Where clients are based, shown on the globe. Edit freely: [latitude, longitude].
-// `home: true` marks where Mrinal works from.
-export const clientLocations = [
-  { city: "Gurugram", country: "India", coords: [28.4595, 77.0266], home: true },
-  { city: "Mumbai", country: "India", coords: [19.076, 72.8777] },
-  { city: "Bengaluru", country: "India", coords: [12.9716, 77.5946] },
-  { city: "New York", country: "United States", coords: [40.7128, -74.006] },
-  { city: "San Francisco", country: "United States", coords: [37.7749, -122.4194] },
-  { city: "Chicago", country: "United States", coords: [41.8781, -87.6298] },
-  { city: "Austin", country: "United States", coords: [30.2672, -97.7431] },
-  { city: "Toronto", country: "Canada", coords: [43.6532, -79.3832] },
-  { city: "London", country: "United Kingdom", coords: [51.5072, -0.1276] },
-  { city: "Berlin", country: "Germany", coords: [52.52, 13.405] },
-  { city: "Amsterdam", country: "Netherlands", coords: [52.3676, 4.9041] },
-  { city: "Dubai", country: "United Arab Emirates", coords: [25.2048, 55.2708] },
-  { city: "Singapore", country: "Singapore", coords: [1.3521, 103.8198] },
-  { city: "Sydney", country: "Australia", coords: [-33.8688, 151.2093] },
+// Countries shown on the interactive globe ("Global reach").
+// `clients`: number of clients in that country, shown as "N clients". Leave null to hide the number.
+// `coords`: [latitude, longitude] the globe flies to. `home: true` marks where Mrinal works from.
+export const clientCountries = [
+  { code: "us", country: "United States", coords: [39.8, -98.6], clients: null },
+  { code: "ca", country: "Canada", coords: [53.7, -98.0], clients: null },
+  { code: "gb", country: "United Kingdom", coords: [54.0, -2.0], clients: null },
+  { code: "de", country: "Germany", coords: [51.2, 10.4], clients: null },
+  { code: "nl", country: "Netherlands", coords: [52.2, 5.3], clients: null },
+  { code: "ae", country: "United Arab Emirates", coords: [24.4, 54.4], clients: null },
+  { code: "in", country: "India", coords: [22.0, 79.0], clients: null, home: true },
+  { code: "sg", country: "Singapore", coords: [1.35, 103.82], clients: null },
+  { code: "au", country: "Australia", coords: [-25.3, 133.8], clients: null },
 ];

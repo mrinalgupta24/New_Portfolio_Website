@@ -2,7 +2,6 @@ import { lazy, Suspense, useState } from "react";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { AnimatePresence, MotionConfig } from "framer-motion";
 import { ToastContainer } from "react-toastify";
-import { Analytics } from "@vercel/analytics/react";
 import "react-toastify/dist/ReactToastify.css";
 import { darkTheme } from './utils/Themes.js'
 import './App.css';
@@ -19,11 +18,14 @@ import Testimonials from "./components/Testimonials";
 import GlobalReach from "./components/GlobalReach";
 import Assistant from "./components/Assistant";
 import CommandPalette from "./components/CommandPalette";
-import Clarity from "./components/Clarity";
+import { Clarity, CloudflareAnalytics } from "./components/Analytics";
 import { Background, ScrollProgress } from "./components/ui";
 
 // The project popup is only needed after a click, so it loads on demand.
 const ProjectDetails = lazy(() => import("./components/ProjectDetails"));
+const StatusPage = lazy(() => import("./pages/Status"));
+
+const isStatusPage = typeof window !== "undefined" && window.location.pathname.replace(/\/+$/, "") === "/status";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -152,11 +154,19 @@ function App() {
         <GlobalStyle />
         <ScrollProgress />
         <Background />
-        <Home />
-        <Assistant />
-        <CommandPalette />
-        <Analytics />
+        {isStatusPage ? (
+          <Suspense fallback={null}>
+            <StatusPage />
+          </Suspense>
+        ) : (
+          <>
+            <Home />
+            <Assistant />
+            <CommandPalette />
+          </>
+        )}
         <Clarity />
+        <CloudflareAnalytics />
         <ToastContainer position="bottom-right" theme="dark" autoClose={5000} newestOnTop pauseOnFocusLoss={false} />
       </MotionConfig>
     </ThemeProvider>

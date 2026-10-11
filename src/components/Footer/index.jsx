@@ -104,6 +104,26 @@ const Credits = styled.div`
   }
 `
 
+const StatusLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  text-decoration: none;
+  color: ${({ theme }) => theme.text_secondary};
+  transition: color 0.2s ease;
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 8px #34d399;
+  }
+  &:hover {
+    color: ${({ theme }) => theme.text_primary};
+  }
+`
+
 const TopButton = styled(motion.a)`
   display: inline-flex;
   align-items: center;
@@ -141,6 +161,9 @@ function Footer() {
             <span>
               © {new Date().getFullYear()} <strong>{Bio.name}</strong>. All rights reserved.
             </span>
+            <StatusLink href={Bio.status}>
+              <span className="dot" /> All systems status
+            </StatusLink>
           </Credits>
           <TopButton href="#about" whileHover={{ y: -3 }}>
             Back to top <HiArrowUp />

@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@vercel/analytics": "^2.0.1",
-    "cobe": "^0.6.5",
+    "@vercel/functions": "^3.9.9",
     "formik": "^2.4.6",
     "framer-motion": "^11.11.17",
+    "globe.gl": "^2.46.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.3.1",

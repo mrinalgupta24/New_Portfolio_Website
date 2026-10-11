@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import {
   HiMagnifyingGlass, HiSparkles, HiEnvelope, HiDocumentText, HiClipboardDocument, HiArrowRight,
   HiUser, HiBriefcase, HiWrenchScrewdriver, HiCube, HiCheckBadge, HiAcademicCap, HiChatBubbleLeftRight,
-  HiGlobeAlt, HiPaperAirplane,
+  HiGlobeAlt, HiPaperAirplane, HiSignal,
 } from 'react-icons/hi2'
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa6'
 import { Bio } from '../../data/constants'
@@ -47,6 +47,7 @@ const ALL_ACTIONS = [
   { group: 'Connect', label: 'View resume', icon: <HiDocumentText />, run: () => visit(Bio.resume), keywords: 'cv pdf download' },
   { group: 'Connect', label: 'LinkedIn', icon: <FaLinkedinIn />, run: () => visit(Bio.linkedin), keywords: 'social profile' },
   { group: 'Connect', label: 'GitHub', icon: <FaGithub />, run: () => visit(Bio.github), keywords: 'code repos social' },
+  { group: 'Connect', label: 'System status', hint: 'Uptime of the site, AI and contact form', icon: <HiSignal />, run: () => (window.location.href = Bio.status), keywords: 'uptime status health monitoring' },
 ]
 
 const Backdrop = styled(motion.div)`
